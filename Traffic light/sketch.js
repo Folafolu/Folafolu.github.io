@@ -49,15 +49,15 @@ function showCorrectLight(){
   }
 }
 function chooseWhichLightToDisplay() {
-  if (whichColorToDisplay) === "green" && millis() > lastSwitchTime + greenLightDuration {
+  if (whichColorToDisplay === "green" && millis() > lastSwitchTime + greenLightDuration ){
     whichColorToDisplay = "yellow";
     lastSwitchTime = millis();
     }
-  else if (whichColorToDisplay) === "yellow" && millis() > lastSwitchTime + yellowLightDuration {
+  else if (whichColorToDisplay === "yellow" && millis() > lastSwitchTime + yellowLightDuration ){
     whichColorToDisplay = "red";
     lastSwitchTime = millis();
   }
-  else if (whichColorToDisplay) === "red" && millis() > lastSwitchTime + redLightDuration {
+  else if (whichColorToDisplay === "red" && millis() > lastSwitchTime + redLightDuration ){
   whichColorToDisplay = "green";
   lastSwitchTime = millis();
     }
