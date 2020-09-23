@@ -55,7 +55,7 @@ function chooseWhichLightToDisplay() {
     }
   else if (whichColorToDisplay) === "yellow" && millis() > lastSwitchTime + yellowLightDuration {
     whichColorToDisplay = "red";
-    astSwitchTime = millis();
+    lastSwitchTime = millis();
   }
   else if (whichColorToDisplay) === "red" && millis() > lastSwitchTime + redLightDuration {
   whichColorToDisplay = "green";
