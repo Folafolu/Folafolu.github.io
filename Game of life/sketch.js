@@ -75,8 +75,8 @@ function takeNextTurn(){
 
       //count the neighbours
       let neighbours = 0;
-      for(let i = -1; i<-1; i++){
-        for(let j=-1; j<= -1; j++){
+      for(let i = -1; i<=1; i++){
+        for(let j=-1; j<=1; j++){
           if(y+i >= 0 && y+i < GRIDSIZE && x+j >= 0 && x+j < GRIDSIZE){
             neighbours += grid[y+i][x+j];
 
