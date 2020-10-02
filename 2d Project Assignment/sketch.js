@@ -8,49 +8,67 @@
 
 
 let grid;
-let GRIDSIZE = 10;
-let cellWidth;
-let cellHeight;
+let GRIDSIZE = 25;
+let cellSize;
+
+
+function preload(){
+  grid = loadStrings("assets/1.txt");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  cellWidth = width/GRIDSIZE;
-  cellHeight = height/GRIDSIZE;
+  // convert grid to 2d array
+  for(let i = 0; i< grid.length; i++){
+    grid[i] = grid[i].split(",");
+  }
+
+  if(width < height){
+    cellSize = windowWidth/ GRIDSIZE;
+  }
+  else{
+    cellSize = windowHeight/GRIDSIZE;
+  }
 }
 
 function draw() {
   background(220);
   displayGrid();
-  boxMove();
+  //character();
 }
 
 
 function displayGrid(){
-  
-  for(let y = 0; y < GRIDSIZE; y++){
-    for(let x = 0; x < GRIDSIZE; x++) {
-      
-      fill("white");
-      rect(cellWidth*x, cellHeight*y, cellWidth, cellHeight);
+  for(let y = 0; y < grid.length; y++){
+    for(let x = 0; x < grid[y].length; x++) {
+      if(grid[y][x] === "0"){
+        fill("black");
+      }
+      else{
+        fill("red");
+      }
+      rect(cellSize*x, cellSize*y, cellSize, cellSize);
     }
 
   }
 }
 
 
+// function character(){
 
-function generateEmptyGrid(GRIDSIZE) {
-  let grid = [];
-  for (let i = 0; i< GRIDSIZE; i++){
-    grid.push([1]);
-    for (let j = 0; j< GRIDSIZE; j++){
-      grid[i].push(0);
-    }
-  }
-  return grid;
-}
+// }
+// function generateEmptyGrid(GRIDSIZE) {
+//   let grid = [];
+//   for (let i = 0; i< GRIDSIZE; i++){
+//     grid.push([1]);
+//     for (let j = 0; j< GRIDSIZE; j++){
+//       grid[i].push(0);
+//     }
+//   }
+//   return grid;
+// }
 
-function boxMove(){
-  fill("black");
-  rect(0, 0, cellWidth, cellHeight);
-  
+// function boxMove(){
+//   fill("black");
+//   rect(0, 0, cellWidth, cellHeight);
+// }

@@ -11,10 +11,16 @@ let cellWidth;
 let cellHeight;
 const GRIDSIZE = 10;
 let autoPlay = false;
+let playerX = 0;
+let playerY = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   grid = generateRandomGrid(GRIDSIZE);
+
+  //place player
+  grid[playerY][playerX] = 9;
+
   cellWidth = width/grid[0].length;
   cellHeight = height/grid.length;
 }
@@ -55,16 +61,44 @@ function keyPressed(){
   if(key === "r"){
     grid = generateRandomGrid(GRIDSIZE);
   }
-  if (key === " "){
-    takeNextTurn();
-  }
+ 
   if(key === "c"){
     grid = generateEmptyGrid(GRIDSIZE);
-  
+  }
+  if(key === "w"){
+    //move up
+    if(grid[playerY-1][playerX] === 0){
+      grid[playerY][playerX] = 0; // reseting player current location to white
+      playerY -= 1;
+      grid[playerY][playerX] = 9; // set new location to red
+
+    }
+  }
+  if(key === "s"){
+    //move down
+    if(grid[playerY+1][playerX] === 0){
+      grid[playerY][playerX] = 0; // reseting player current location to white
+      playerY += 1;
+      grid[playerY][playerX] = 9; // set new location to red
+    }
+  }
+  if(key === "d"){
+    //move right
+    if(grid[playerY][playerX+1] === 0){
+      grid[playerY][playerX] = 0; // reseting player current location to white
+      playerX += 1;
+      grid[playerY][playerX] = 9; // set new location to red }
+    }
   }
   if(key === "a"){
-    autoPlay=!autoPlay;
+    //move left
+    if(grid[playerY][playerX-1] === 0){
+      grid[playerY][playerX] = 0; // reseting player current location to white
+      playerX -= 1;
+      grid[playerY][playerX] = 9; // set new location to red
+    }
   }
+
 }
 
 function takeNextTurn(){
@@ -113,6 +147,9 @@ function displayGrid(){
     for(let x = 0; x < grid[y].length; x++) {
       if(grid[y][x]===0){
         fill("white");
+      }
+      else if(grid[y][x] === 9){
+        fill("red");
       }
       else{
         fill("black");
