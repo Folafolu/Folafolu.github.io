@@ -56,7 +56,7 @@ function setup() {
 function draw() {
   background(220);
   displayGrid();
- // movePlayer();
+  // movePlayer();
   
 }
 
@@ -71,22 +71,26 @@ function displayGrid(){
         fill("red");
       }
       else if(grid[y][x] === 10){
+        fill("blue");
         if (millis() > lastTeleportTime + teleportTime){
           move = !move;
           lastTeleportTime = millis();
-          if(!move){
-            playerX = random(grid[y][x]);
-            playerY = random(grid[y][x]);
-          }
-        fill("blue");
+          // if(!move){
+          //   grid[playerY][playerX] = 0;
+          //   if (grid[playerY+1][playerX-1] === 0){
+          //     playerX +- random(grid.length);
+          //      playerY += 1;
+          //     grid[playerY][playerX] = 10;
+          //   }
+          // }
         }
-      else{
-        fill("green");
-        }
-        rect(cellSize*x, cellSize*y, cellSize, cellSize);
       }
-
+      else if(grid[y][x] === 1){
+        fill("green");
+      }
+      rect(cellSize*x, cellSize*y, cellSize, cellSize);
     }
+
   }
 }
 
