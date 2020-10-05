@@ -11,8 +11,8 @@ let cellWidth;
 let cellHeight;
 const GRIDSIZE = 10;
 let autoPlay = false;
-let playerX = 0;
-let playerY = 0;
+let playerX = 1;
+let playerY = 1;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

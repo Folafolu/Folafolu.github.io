@@ -1,5 +1,5 @@
 // Project Title
-// Your Name
+// FolaY
 // Date
 //
 // Extra for Experts:
@@ -10,8 +10,16 @@
 let grid;
 let GRIDSIZE = 25;
 let cellSize;
-let characterX = 0;
-let characterY = 0;
+//x and y position of the character
+let characterX = 1;
+let characterY = 1;
+// x and y position of the 2nd player
+let playerX = 2;
+let playerY = 2;
+
+let lastTeleportTime = 0;
+let teleportTime = 500;
+let move = false;
 
 
 function preload(){
@@ -21,32 +29,34 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  //loop through the whole 2d array, and turn everything to numbers
-  for (let y=0; y<GRIDSIZE; y++) {
-    for (let x=0; x<GRIDSIZE; x++) {
-      grid[y][x] = int(grid[y][x]);
-    }
-  }
-
-  //place player
-  grid[characterY][characterX] = 9;
-
   // convert grid to 2d array
   for(let i = 0; i< grid.length; i++){
     grid[i] = grid[i].split(",");
   }
 
+  //loop through the whole 2d array, and turn everything to numbers
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < GRIDSIZE; x++) {
+      grid[y][x] = int(grid[y][x]);
+    }
+  }
+
+  //place character
+  grid[characterY][characterX] = 9;
+  grid[playerY][playerX] = 10;
+  
   if(width < height){
-    cellSize = width/ GRIDSIZE;
+    cellSize = windowWidth/ GRIDSIZE;
   }
   else{
-    cellSize = height/GRIDSIZE;
+    cellSize = windowHeight/GRIDSIZE;
   }
 }
 
 function draw() {
   background(220);
   displayGrid();
+ // movePlayer();
   
 }
 
@@ -55,20 +65,43 @@ function displayGrid(){
   for(let y = 0; y < grid.length; y++){
     for(let x = 0; x < grid[y].length; x++) {
       if(grid[y][x] === 0){
-        fill("black");
-      }
-      else if(grid[y][x] === 9){
         fill("white");
       }
-      else{
+      else if(grid[y][x] === 9){
         fill("red");
       }
-      rect(cellSize*x, cellSize*y, cellSize, cellSize);
-    }
+      else if(grid[y][x] === 10){
+        if (millis() > lastTeleportTime + teleportTime){
+          move = !move;
+          lastTeleportTime = millis();
+          if(!move){
+            playerX = random(grid[y][x]);
+            playerY = random(grid[y][x]);
+          }
+        fill("blue");
+        }
+      else{
+        fill("green");
+        }
+        rect(cellSize*x, cellSize*y, cellSize, cellSize);
+      }
 
+    }
   }
 }
 
+// function movePlayer(){
+//   if(grid[y][x] === 10){
+//     if (millis() > lastTeleportTime + teleportTime){
+//       move = !move;
+//       lastTeleportTime = millis();
+//     }
+//     if(move){
+//       playerX = random(grid[0][0]);
+//       playerY = random(grid[0][0]);
+//     }
+//   }
+// }
 
 function keyPressed(){
   if(key === "w"){
@@ -105,18 +138,3 @@ function keyPressed(){
     }
   }
 }
-// function generateEmptyGrid(GRIDSIZE) {
-//   let grid = [];
-//   for (let i = 0; i< GRIDSIZE; i++){
-//     grid.push([1]);
-//     for (let j = 0; j< GRIDSIZE; j++){
-//       grid[i].push(0);
-//     }
-//   }
-//   return grid;
-// }
-
-// function boxMove(){
-//   fill("black");
-//   rect(0, 0, cellWidth, cellHeight);
-// }
