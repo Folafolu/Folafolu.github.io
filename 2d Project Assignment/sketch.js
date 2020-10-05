@@ -75,6 +75,7 @@ function displayGrid(){
         if (millis() > lastTeleportTime + teleportTime){
           move = !move;
           lastTeleportTime = millis();
+          //This is where the problem starts from
           // if(!move){
           //   grid[playerY][playerX] = 0;
           //   if (grid[playerY+1][playerX-1] === 0){
@@ -83,6 +84,7 @@ function displayGrid(){
           //     grid[playerY][playerX] = 10;
           //   }
           // }
+          // This is where the problem ends
         }
       }
       else if(grid[y][x] === 1){
