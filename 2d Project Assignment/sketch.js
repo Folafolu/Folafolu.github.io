@@ -76,25 +76,26 @@ function displayGrid(){
           move = !move;
           lastTeleportTime = millis();
           //This is where the problem starts from
-          // if(!move){
-          //   grid[playerY][playerX] = 0;
-          //   if (grid[playerY+1][playerX-1] === 0){
-          //     playerX +- random(grid.length);
-          //      playerY += 1;
-          //     grid[playerY][playerX] = 10;
-          //   }
-          // }
-          // This is where the problem ends
+          if(!move){
+            grid[playerY][playerX] = 0;
+            if (grid[playerY][playerX] === 0){
+              playerX += random(grid.length);
+              playerY += random(grid[y].length);
+              grid[playerY][playerX] = 10;
+            }  
+          }
         }
+        //This is where the problem ends
       }
       else if(grid[y][x] === 1){
         fill("green");
       }
       rect(cellSize*x, cellSize*y, cellSize, cellSize);
     }
-
-  }
+  }         
 }
+
+
 
 // function movePlayer(){
 //   if(grid[y][x] === 10){
