@@ -16,7 +16,6 @@ let characterY = 1;
 // x and y position of the 2nd player
 let playerX = 2;
 let playerY = 2;
-
 let lastTeleportTime = 0;
 let teleportTime = 500;
 let move = false;
@@ -56,6 +55,10 @@ function setup() {
 function draw() {
   background(220);
   displayGrid();
+  if(keyIsPressed===true){
+    keyPressed();
+  }
+  
   // movePlayer();
   
 }
@@ -72,20 +75,12 @@ function displayGrid(){
       }
       else if(grid[y][x] === 10){
         fill("blue");
-        if (millis() > lastTeleportTime + teleportTime){
-          move = !move;
-          lastTeleportTime = millis();
+        //if (millis() > lastTeleportTime + teleportTime){ 
+          
+          //lastTeleportTime = millis();
           //This is where the problem starts from
-          if(!move){
-            grid[playerY][playerX] = 0;
-            if (grid[playerY][playerX] === 0){
-              playerX += random(grid.length);
-              playerY += random(grid[y].length);
-              grid[playerY][playerX] = 10;
-            }  
-          }
-        }
         //This is where the problem ends
+      //}
       }
       else if(grid[y][x] === 1){
         fill("green");
@@ -110,7 +105,7 @@ function displayGrid(){
 //   }
 // }
 
-function keyPressed(){
+function keyPressed() {
   if(key === "w"){
     //move up
     if(grid[characterY-1][characterX] === 0){
@@ -145,3 +140,4 @@ function keyPressed(){
     }
   }
 }
+
