@@ -57,6 +57,7 @@ function draw() {
   displayGrid();
   if(keyIsPressed===true){
     keyPressed();
+    lastTimeKeyPressed ;
   }
   
   // movePlayer();
