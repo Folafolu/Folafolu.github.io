@@ -53,11 +53,11 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background("tan");
   displayGrid();
   if(keyIsPressed===true){
     keyPressed();
-    lastTimeKeyPressed ;
+    //lastTimeKeyPressed ;
   }
   
   // movePlayer();
