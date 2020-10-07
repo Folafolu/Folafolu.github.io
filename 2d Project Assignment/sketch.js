@@ -64,6 +64,7 @@ function draw() {
 
 
 function displayGrid(){
+  rectMode(CENTER);
   noStroke();
   for(let y = 0; y < grid.length; y++){
     for(let x = 0; x < grid[y].length; x++) {
@@ -75,12 +76,6 @@ function displayGrid(){
       }
       else if(grid[y][x] === 10){
         fill("blue");
-        grid[playerY][playerX] = 0;
-        grid[random(1,8)][random(1,24)] = "blue";
-        //grid[playerY][playerX] === "blue";
-
-
-        //moveTarget();
       }
       else if(grid[y][x] === 1){
         fill("green");
@@ -90,13 +85,6 @@ function displayGrid(){
   }         
 }
 
-
-// function moveTarget(){
-//   grid[playerY][playerX] === 0;
-//   playerY = 2;
-//   grid[playerY][playerX] === 10;
-  
-// }
 
 function keyPressed() {
   if(key === "w"){
