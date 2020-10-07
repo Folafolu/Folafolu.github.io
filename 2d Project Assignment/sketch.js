@@ -55,17 +55,16 @@ function setup() {
 function draw() {
   background("tan");
   displayGrid();
-  if(keyIsPressed===true){
+  frameRate(10);
+  if(keyIsPressed === true){
     keyPressed();
-    //lastTimeKeyPressed ;
   }
-  
-  // movePlayer();
   
 }
 
 
 function displayGrid(){
+  noStroke();
   for(let y = 0; y < grid.length; y++){
     for(let x = 0; x < grid[y].length; x++) {
       if(grid[y][x] === 0){
@@ -76,12 +75,12 @@ function displayGrid(){
       }
       else if(grid[y][x] === 10){
         fill("blue");
-        //if (millis() > lastTeleportTime + teleportTime){ 
-          
-          //lastTeleportTime = millis();
-          //This is where the problem starts from
-        //This is where the problem ends
-      //}
+        grid[playerY][playerX] = 0;
+        grid[random(1,8)][random(1,24)] = "blue";
+        //grid[playerY][playerX] === "blue";
+
+
+        //moveTarget();
       }
       else if(grid[y][x] === 1){
         fill("green");
@@ -92,18 +91,11 @@ function displayGrid(){
 }
 
 
-
-// function movePlayer(){
-//   if(grid[y][x] === 10){
-//     if (millis() > lastTeleportTime + teleportTime){
-//       move = !move;
-//       lastTeleportTime = millis();
-//     }
-//     if(move){
-//       playerX = random(grid[0][0]);
-//       playerY = random(grid[0][0]);
-//     }
-//   }
+// function moveTarget(){
+//   grid[playerY][playerX] === 0;
+//   playerY = 2;
+//   grid[playerY][playerX] === 10;
+  
 // }
 
 function keyPressed() {
