@@ -1,5 +1,5 @@
 // Project Title
-// FolaY
+// Fola
 // Date
 //
 // Extra for Experts:
@@ -53,19 +53,18 @@ function setup() {
 }
 
 function draw() {
-  background("tan");
+  background("grey");
   displayGrid();
   frameRate(10);
   if(keyIsPressed === true){
     keyPressed();
   }
-
 }
 
 
 function displayGrid(){
-let xBufferZone = 350;
-let yBufferZone = 200;
+  let xBufferZone = 200 ;
+  let yBufferZone = 200 ;
 
   noStroke();
   for(let y = 0; y < grid.length; y++){
@@ -124,8 +123,3 @@ function keyPressed() {
   }
 }
 
-// function touch(){
-//   if(grid[characterY][characterX] === grid[playerY][playerX]){
-//     grid[y][x] = 0;
-//   }
-// }
