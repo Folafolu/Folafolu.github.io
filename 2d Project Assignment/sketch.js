@@ -8,7 +8,7 @@
 
 
 let grid;
-let GRIDSIZE = 25;
+let GRIDSIZE = 44;
 let cellSize;
 //x and y position of the character
 let characterX = 1;
@@ -59,12 +59,14 @@ function draw() {
   if(keyIsPressed === true){
     keyPressed();
   }
-  
+
 }
 
 
 function displayGrid(){
-  rectMode(CENTER);
+let xBufferZone = 350;
+let yBufferZone = 200;
+
   noStroke();
   for(let y = 0; y < grid.length; y++){
     for(let x = 0; x < grid[y].length; x++) {
@@ -78,9 +80,9 @@ function displayGrid(){
         fill("blue");
       }
       else if(grid[y][x] === 1){
-        fill("green");
+        fill("purple");
       }
-      rect(cellSize*x, cellSize*y, cellSize, cellSize);
+      rect(cellSize*x + xBufferZone, cellSize*y + yBufferZone, cellSize, cellSize);
     }
   }         
 }
@@ -89,7 +91,7 @@ function displayGrid(){
 function keyPressed() {
   if(key === "w"){
     //move up
-    if(grid[characterY-1][characterX] === 0){
+    if(grid[characterY-1][characterX] === 0 || grid[characterY-1][characterX] === 10){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterY -= 1;
       grid[characterY][characterX] = 9; // set new location to red
@@ -98,7 +100,7 @@ function keyPressed() {
   }
   if(key === "s"){
     //move down
-    if(grid[characterY+1][characterX] === 0){
+    if(grid[characterY+1][characterX] === 0 || grid[characterY+1][characterX] === 10){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterY += 1;
       grid[characterY][characterX] = 9; // set new location to red
@@ -106,7 +108,7 @@ function keyPressed() {
   }
   if(key === "d"){
     //move right
-    if(grid[characterY][characterX+1] === 0){
+    if(grid[characterY][characterX+1] === 0 || grid[characterY][characterX+1] === 10){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterX += 1;
       grid[characterY][characterX] = 9; // set new location to red }
@@ -114,7 +116,7 @@ function keyPressed() {
   }
   if(key === "a"){
     //move left
-    if(grid[characterY][characterX-1] === 0){
+    if(grid[characterY][characterX-1] === 0 || grid[characterY][characterX-1] === 10){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterX -= 1;
       grid[characterY][characterX] = 9; // set new location to red
@@ -122,3 +124,8 @@ function keyPressed() {
   }
 }
 
+// function touch(){
+//   if(grid[characterY][characterX] === grid[playerY][playerX]){
+//     grid[y][x] = 0;
+//   }
+// }
