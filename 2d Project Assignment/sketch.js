@@ -16,9 +16,12 @@ let characterY = 1;
 // x and y position of the 2nd player
 let playerX = 2;
 let playerY = 2;
-let lastTeleportTime = 0;
-let teleportTime = 500;
-let move = false;
+// let lastTeleportTime = 0;
+// let teleportTime = 500;
+// let move = false;
+let blinkTime;
+let button;
+let score = 0;
 
 
 function preload(){
@@ -50,11 +53,19 @@ function setup() {
   else{
     cellSize = windowHeight/GRIDSIZE;
   }
+  blinkTime = new Timer(10000);
 }
 
 function draw() {
-  background("tan");
+  background("pink");
   displayGrid();
+  if(blinkTime.IsDone()){
+    displayPlayAgainButton();
+    blinkTime.setWaitTime(10000);
+    //blinkTime.reset();
+  }
+
+  blinkTime.display(100,200,60);  
   frameRate(10);
   if(keyIsPressed === true){
     keyPressed();
@@ -63,7 +74,7 @@ function draw() {
 
 
 function displayGrid(){
-  let xBufferZone = 200 ;
+  let xBufferZone = 100 ;
   let yBufferZone = 200 ;
 
   noStroke();
@@ -90,36 +101,101 @@ function displayGrid(){
 function keyPressed() {
   if(key === "w"){
     //move up
-    if(grid[characterY-1][characterX] === 0 || grid[characterY-1][characterX] === 10){
+    if(grid[characterY-1][characterX] === 0 ){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterY -= 1;
       grid[characterY][characterX] = 9; // set new location to red
-
+    }
+    if(grid[characterY-1][characterX] === 10){
+      grid[characterY][characterX] = 0; // reseting player current location to white
+      characterY -= 1;
+      score +=1;
+      grid[characterY][characterX] = 9; // set new location to red
     }
   }
   if(key === "s"){
     //move down
-    if(grid[characterY+1][characterX] === 0 || grid[characterY+1][characterX] === 10){
+    if(grid[characterY+1][characterX] === 0 ){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterY += 1;
+      grid[characterY][characterX] = 9; // set new location to red
+    }
+    if(grid[characterY+1][characterX] === 10){
+      grid[characterY][characterX] = 0; // reseting player current location to white
+      characterY += 1;
+      score += 1;
       grid[characterY][characterX] = 9; // set new location to red
     }
   }
   if(key === "d"){
     //move right
-    if(grid[characterY][characterX+1] === 0 || grid[characterY][characterX+1] === 10){
+    if(grid[characterY][characterX+1] === 0 ){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterX += 1;
+      grid[characterY][characterX] = 9; // set new location to red }
+    }
+    if(grid[characterY][characterX+1] === 10){
+      grid[characterY][characterX] = 0; // reseting player current location to white
+      characterX += 1;
+      score +=1; 
       grid[characterY][characterX] = 9; // set new location to red }
     }
   }
   if(key === "a"){
     //move left
-    if(grid[characterY][characterX-1] === 0 || grid[characterY][characterX-1] === 10){
+    if(grid[characterY][characterX-1] === 0 ){
       grid[characterY][characterX] = 0; // reseting player current location to white
       characterX -= 1;
+      grid[characterY][characterX] = 9; // set new location to red
+    }
+    if(grid[characterY][characterX-1] === 10){
+      grid[characterY][characterX] = 0; // reseting player current location to white
+      characterX -= 1;
+      score +=1;
       grid[characterY][characterX] = 9; // set new location to red
     }
   }
 }
 
+
+class Timer {
+  constructor(howLongToWait){
+    this.howLongToWait = howLongToWait;
+    this.beginTime = millis();
+    this.endTime = this.beginTime + this.howLongToWait;
+  }
+
+  IsDone(){
+    return millis() >= this.endTime;
+  }
+
+  reset(){
+    this.beginTime = millis();
+    this.endTime = this.beginTime + this.howLongToWait;
+  }
+  setWaitTime(howLongToWait){
+    this.howLongToWait = howLongToWait;
+  }
+  display(x, y, size){
+    let remainingSeconds = round((this.endTime - millis()) /100) /10;
+    textSize(size);
+    text(remainingSeconds, x, y);
+  }
+}
+
+function displayPlayAgainButton(){
+  noLoop();
+  button = createButton("PLAY AGAIN");
+  //textSize(16);
+  button.position(windowWidth/2 - 100, windowHeight/2 - 50);
+  button.size(200,50);
+  //button.style('font-size', 400);
+  button.style('background-color', "#03c4a1");
+  button.mousePressed(resetTime);
+}
+
+function resetTime(){
+  blinkTime.reset();
+  removeElements();
+  loop();
+}
