@@ -53,7 +53,7 @@ function setup() {
   else{
     cellSize = windowHeight/GRIDSIZE;
   }
-  blinkTime = new Timer(10000);
+  blinkTime = new Timer(15000);
 }
 
 function draw() {
@@ -61,7 +61,7 @@ function draw() {
   displayGrid();
   if(blinkTime.IsDone()){
     displayPlayAgainButton();
-    blinkTime.setWaitTime(10000);
+    blinkTime.setWaitTime(15000);
     //blinkTime.reset();
   }
 
