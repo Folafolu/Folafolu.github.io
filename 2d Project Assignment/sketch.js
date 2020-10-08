@@ -53,7 +53,7 @@ function setup() {
 }
 
 function draw() {
-  background("grey");
+  background("tan");
   displayGrid();
   frameRate(10);
   if(keyIsPressed === true){
