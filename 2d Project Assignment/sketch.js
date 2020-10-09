@@ -22,6 +22,7 @@ let playerY = 2;
 let blinkTime;
 let button;
 let score = 0;
+let initialGrid;
 
 
 function preload(){
@@ -43,9 +44,13 @@ function setup() {
     }
   }
 
+  initialGrid = deepCopy(grid);
+
   //place character
   grid[characterY][characterX] = 9;
-  grid[playerY][playerX] = 10;
+  //grid[playerY][playerX] = 10;
+
+   
   
   if(width < height){
     cellSize = windowWidth/ GRIDSIZE;
@@ -54,6 +59,18 @@ function setup() {
     cellSize = windowHeight/GRIDSIZE;
   }
   blinkTime = new Timer(15000);
+}
+
+function deepCopy(someArray) {
+  let newArray = [];
+  for(let y = 0; y < someArray.length; y++) {
+    newArray.push([]);
+    for(let x = 0; x < someArray[y].length; x++) {
+      newArray[y].push(someArray[y][x]);
+    }
+  }
+  return newArray;
+  
 }
 
 function draw() {
@@ -65,11 +82,12 @@ function draw() {
     //blinkTime.reset();
   }
 
-  blinkTime.display(100,200,60);  
+  blinkTime.display(200,100,60);  
   frameRate(10);
   if(keyIsPressed === true){
     keyPressed();
   }
+  displayScore(800,100);
 }
 
 
@@ -179,7 +197,7 @@ class Timer {
   display(x, y, size){
     let remainingSeconds = round((this.endTime - millis()) /100) /10;
     textSize(size);
-    text(remainingSeconds, x, y);
+    text("Time Count: " + remainingSeconds, x, y);
   }
 }
 
@@ -197,5 +215,11 @@ function displayPlayAgainButton(){
 function resetTime(){
   blinkTime.reset();
   removeElements();
+  grid = deepCopy(initialGrid);
   loop();
+}
+
+function displayScore(x, y ){
+  text( "Your Score is: " + score, x, y);
+  textSize(12);
 }
