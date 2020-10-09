@@ -47,7 +47,8 @@ function setup() {
   initialGrid = deepCopy(grid);
 
   //place character
-  grid[characterY][characterX] = 9;
+  //grid[characterY][characterX] = 9;
+
   //grid[playerY][playerX] = 10;
 
    
@@ -67,6 +68,7 @@ function deepCopy(someArray) {
     newArray.push([]);
     for(let x = 0; x < someArray[y].length; x++) {
       newArray[y].push(someArray[y][x]);
+      //grid[characterY][characterX] = 0;
     }
   }
   return newArray;
@@ -94,6 +96,7 @@ function draw() {
 function displayGrid(){
   let xBufferZone = 100 ;
   let yBufferZone = 200 ;
+  grid[characterY][characterX] = 9;
 
   noStroke();
   for(let y = 0; y < grid.length; y++){
