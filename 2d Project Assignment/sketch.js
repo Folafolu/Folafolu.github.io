@@ -68,7 +68,7 @@ function deepCopy(someArray) {
     newArray.push([]);
     for(let x = 0; x < someArray[y].length; x++) {
       newArray[y].push(someArray[y][x]);
-      //grid[characterY][characterX] = 0;
+      
     }
   }
   return newArray;
@@ -199,7 +199,7 @@ class Timer {
   }
   display(x, y){
     let remainingSeconds = round((this.endTime - millis()) /100) /10;
-    textSize(30);
+    textSize(40);
     text("Time Count: " + remainingSeconds, x, y);
   }
 }
@@ -213,6 +213,7 @@ function displayPlayAgainButton(){
   //button.style('font-size', 400);
   button.style('background-color', "lightblue");
   button.mousePressed(resetTime);
+  
 }
 
 function resetTime(){
@@ -225,6 +226,6 @@ function resetTime(){
 
 function displayScore(x, y ){
   text( "Your Score is: " + score, x, y);
-  textSize(12);
+  //textSize(30);
 }
 
