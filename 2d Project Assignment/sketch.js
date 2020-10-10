@@ -81,7 +81,7 @@ function draw() {
   if(blinkTime.IsDone()){
     displayPlayAgainButton();
     blinkTime.setWaitTime(15000);
-    //blinkTime.reset();
+    blinkTime.reset();
   }
 
   blinkTime.display(200,100,60);  
@@ -94,8 +94,8 @@ function draw() {
 
 
 function displayGrid(){
-  let xBufferZone = 100 ;
-  let yBufferZone = 200 ;
+  let xBufferZone = 300;
+  let yBufferZone = 150 ;
   grid[characterY][characterX] = 9;
 
   noStroke();
@@ -197,9 +197,9 @@ class Timer {
   setWaitTime(howLongToWait){
     this.howLongToWait = howLongToWait;
   }
-  display(x, y, size){
+  display(x, y){
     let remainingSeconds = round((this.endTime - millis()) /100) /10;
-    textSize(size);
+    textSize(30);
     text("Time Count: " + remainingSeconds, x, y);
   }
 }
@@ -211,12 +211,13 @@ function displayPlayAgainButton(){
   button.position(windowWidth/2 - 100, windowHeight/2 - 50);
   button.size(200,50);
   //button.style('font-size', 400);
-  button.style('background-color', "#03c4a1");
+  button.style('background-color', "lightblue");
   button.mousePressed(resetTime);
 }
 
 function resetTime(){
   blinkTime.reset();
+  score = 0;
   removeElements();
   grid = deepCopy(initialGrid);
   loop();
@@ -226,3 +227,4 @@ function displayScore(x, y ){
   text( "Your Score is: " + score, x, y);
   textSize(12);
 }
+
