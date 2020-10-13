@@ -40,7 +40,7 @@ function setup() {
     }
   }
 
-// making an exact copy of grid 
+  // making an exact copy of grid 
   initialGrid = deepCopy(grid);
  
 
